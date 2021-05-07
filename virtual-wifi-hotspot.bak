@@ -1,0 +1,103 @@
+@echo off
+
+:menu
+cls
+color 1b
+title Crear Red WiFi, tambien en windows 8 ..::BY: kAS-dANOUCHE::..
+
+echo.
+echo Bienvenido %USERNAME%.
+echo.
+echo Elija una Opcion...
+echo.
+echo ****************************************************
+echo ****************************************************
+echo * 1.Automatico                                     *
+echo * 2.Configurar RED Wifi                            *
+echo * 3.Iniciar RED Wifi                               *
+echo * 4.Apagar RED Wifi                                *
+echo * 5.Ver que dispositivos estan conectados a tu RED *
+echo * 6.Caracteristicas de tu RED Wifi                 *
+echo *                                                  *
+echo *                                          7.Salir *
+echo ****************************************************
+echo.
+set /p menu= Escriba El Numero de Su Opcion:
+
+if %menu%==1 goto Auto
+if %menu%==2 goto Configurar
+if %menu%==3 goto Iniciar
+if %menu%==4 goto Apagar
+if %menu%==5 goto Ver
+if %menu%==6 goto Caract
+if %menu%==7 goto Salir
+goto menu
+
+:Auto
+cls
+echo  Modo Automatico
+echo ****************************************************
+echo.
+rem set /p ssid= Escriba el Nombre Para su RED:
+rem set /p key= Escriba la Clave para su RED:
+c:\windows\system32\netsh wlan set hostednetwork mode=allow ssid=Blackberry key=23951711
+c:\windows\system32\netsh wlan start hostednetwork
+pause
+cls
+echo.
+echo.
+echo.
+echo.
+echo Si su RED se Inicio satisfactoriamente, su CLAVE es: 12345678
+echo.
+echo.
+echo.
+echo.
+pause
+goto menu
+
+:Configurar
+cls
+echo  Configurar RED
+echo ****************************************************
+echo.
+set /p ssid= Escriba el Nombre Para su RED:
+set /p key= Escriba la Clave para su RED:
+c:\windows\system32\netsh wlan set hostednetwork mode=allow ssid=%ssid% key=%key%
+pause
+goto menu
+
+:Iniciar
+echo.
+echo Iniciando RED...
+c:\windows\system32\netsh wlan start hostednetwork
+pause
+goto menu
+
+:Apagar
+echo.
+echo Apagando RED...
+c:\windows\system32\netsh wlan stop hostednetwork
+pause
+goto menu
+
+:Ver
+cls
+echo  Dispositivos estan conectados a tu RED
+echo ****************************************************
+echo.
+c:\windows\system32\netsh wlan show hostednetwork
+pause
+goto menu
+
+:Caract
+cls
+echo  Caracteristicas de tu RED Wifi
+echo ****************************************************
+echo.
+c:\windows\system32\netsh wlan show hostednetwork security
+pause
+goto menu
+
+:Salir
+exit
